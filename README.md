@@ -1,11 +1,11 @@
 # Sudoku Snap
 
-A desktop app that extracts a 9x9 number grid from a photo and solves it with computer vision and ML.
+A small desktop app that reads a Sudoku from a photo and solves it. It uses OpenCV for image processing and a simple ML model for digit recognition.
 
 ## Quick start
 
-1. Install Python 3.8+ from the official site.
-2. (Recommended) create and activate a virtual environment.
+1. Install Python 3.8+.
+2. (Optional) create and activate a virtual environment.
 3. Install dependencies:
    ```bash
    pip install -r requirements.txt
@@ -16,37 +16,37 @@ A desktop app that extracts a 9x9 number grid from a photo and solves it with co
    ```
 
 Notes:
-- On first run, a classifier file will be created (can take a few minutes). Subsequent runs are instant.
-- You can choose the recognition backend in `Run.py` by setting `modeltype` to "KNN" (default) or "CNN".
+- On first run, the recognition model file will be created. This can take a few minutes. Later runs are much faster.
+- You can switch between KNN and CNN recognition in `Run.py` via `modeltype`.
 
-## Usage
+## Using the app
 
-- Launch the app and select a photo containing a Sudoku-like grid.
-- The app will show intermediate processing stages and a parsed grid.
-- Edit any incorrect cells, then click Reveal Solution.
+- Open the app and pick a photo with a clear Sudoku grid.
+- Step through the processing stages or skip straight to the parsed grid.
+- Fix any wrong cells, then press Reveal Solution.
 
-Example screens (local images):
+Screenshots:
 
 ![Home](Screenshots/1.png)
 ![Stage](Screenshots/4.png)
 ![Parsed](Screenshots/18.png)
 ![Solved](Screenshots/19.png)
 
-## How it works
+## How it works (short version)
 
-- Preprocess image, detect the largest grid-like region, and warp it to a flat view.
-- Slice the grid into 81 cells, clean and normalize each cell.
-- Recognize digits using a configurable model (KNN or CNN trained on handwritten digits).
-- Solve the grid and render the result back onto the canvas.
+- Finds and flattens the grid area from the photo.
+- Splits the grid into 81 cells and cleans each cell image.
+- Recognizes digits with either a KNN classifier or a small CNN.
+- Solves the puzzle and draws the result on the canvas.
 
-## Development
+## Structure
 
-- Primary entry point: `Run.py`
-- Main UI and flow: `MainUI.py`
-- Vision pipeline: `BoardExtractor.py`, `RecognizeAndConstructBoard.py`
-- Recognition backends: `KNN.py`, `CNN.py`
+- Entry point: `Run.py`
+- UI: `MainUI.py`
+- Vision: `BoardExtractor.py`, `RecognizeAndConstructBoard.py`
+- Recognition: `KNN.py`, `CNN.py`
 - Solver: `SudokuSolver.py`
 
 ## License
 
-This project is released under CC0 1.0 Universal. See `LICENSE`.
+CC0 1.0 Universal (see `LICENSE`).

@@ -142,10 +142,10 @@ class HomePage(Frame):
         self.nextbut = Button(self, text="Next", command=self.next, padx=30, fg="gray")
         self.nextbut.grid(row=4, column=1, padx=5, pady=5, sticky="e")
         self.mylink = Label(self, text=" ", borderwidth=3, relief=SUNKEN, fg="blue",
-                            cursor="hand2")
+                            cursor="")
 
         self.mylink.grid(row=5, columnspan=6, sticky="ew")
-        self.mylink.bind("<Button-1>", lambda e: self.callback("#"))
+        self.mylink.bind("<Button-1>", lambda e: None)
 
     # Get_and_set_the_board, set the selected image path in the Stages Frame and show the Stages Frame
     def next(self):
@@ -178,7 +178,7 @@ class HomePage(Frame):
         try:
             img = Image.open(filename)
         except:
-            messagebox.showerror("ERROR", "Non Image File selected")
+            messagebox.showerror("Error", "The selected file is not an image.")
             return
         self.selectedimagepath = filename
         self.imagepathdisplay.configure(fg="black")
@@ -216,10 +216,10 @@ class StagesFrame(Frame):
                            15: 'Blackfilling and centering the image'}
         self.currentstage = 1
         self.mylink = Label(self, text=" ", borderwidth=3, relief=SUNKEN, fg="blue",
-                            cursor="hand2")
+                            cursor="")
 
         self.mylink.grid(row=5, columnspan=6, sticky="ew")
-        self.mylink.bind("<Button-1>", lambda e: self.callback("#"))
+        self.mylink.bind("<Button-1>", lambda e: None)
         self.controller.title("Stages")
         self.stagelabel = Label(self, relief=GROOVE, text=self.stagesdict[self.currentstage], font=("Consolas 14"),
                                 bg="lightblue")
@@ -313,7 +313,6 @@ class SudokuUI(Frame):
         # button or not.
         self.solutionrevealed = False
         self.row, self.col = -1, -1
-        self.solutionrevealed = False
         self.controller.title("Sudoku Recognized!")
         self.toplabel = Label(self,
                               text="Click on any cell to enter or change any wrong entries.\nEnter . to empty the cell or a number to fill it",
@@ -337,7 +336,7 @@ class SudokuUI(Frame):
                                   bg="lightblue", command=self.goback, padx=10, pady=4)
         self.back_button.pack(fill=X, side=LEFT, padx=50, pady=5)
         self.mylink = Label(self, text=" ", borderwidth=3, relief=SUNKEN, fg="blue",
-                            cursor="hand2")
+                            cursor="")
         self.__draw_grid()
         self.__draw_puzzle()
 
