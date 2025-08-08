@@ -1,4 +1,4 @@
-# GridVision
+# Sudoku Snap
 
 A desktop app that extracts a 9x9 number grid from a photo and solves it with computer vision and ML.
 
