@@ -46,7 +46,7 @@ class MainUI(Tk):
             self.frameslist[F] = frame
         # Show the first frame ie.. the homepage
         self.show_frame(HomePage)
-        self.title("AI Sudoku")
+        self.title("GridVision")
     '''This function is called when the user presses the next button in the Home Page.
     As soon as the path to the image is obtained, this function initializes an object of 
     BoardExtractor, calls it's functions to get a 2D array of the board cell images, then 
@@ -118,8 +118,8 @@ class HomePage(Frame):
         self.controller = controller
         # Initially no image is selected
         self.selectedimagepath = None
-        self.controller.title("Sudoku Solver")
-        self.titlelabel = Label(self, text="Smart Sudoku Solver", relief=GROOVE, font=("Consolas 18"), bg="lightgreen")
+        self.controller.title("Grid Solver")
+        self.titlelabel = Label(self, text="Smart Number Grid Solver", relief=GROOVE, font=("Consolas 18"), bg="lightgreen")
         self.titlelabel.grid(row=0, columnspan=4, sticky="ew")
 
         self.selimg = Button(self, text='Open image', command=self.open_img, relief=RAISED, fg="blue", bg="light blue",
@@ -141,11 +141,11 @@ class HomePage(Frame):
         # The Next Button
         self.nextbut = Button(self, text="Next", command=self.next, padx=30, fg="gray")
         self.nextbut.grid(row=4, column=1, padx=5, pady=5, sticky="e")
-        self.mylink = Label(self, text="Developed by Neeramitra Reddy", borderwidth=3, relief=SUNKEN, fg="blue",
+        self.mylink = Label(self, text=" ", borderwidth=3, relief=SUNKEN, fg="blue",
                             cursor="hand2")
 
         self.mylink.grid(row=5, columnspan=6, sticky="ew")
-        self.mylink.bind("<Button-1>", lambda e: self.callback("https://github.com/neeru1207"))
+        self.mylink.bind("<Button-1>", lambda e: self.callback("#"))
 
     # Get_and_set_the_board, set the selected image path in the Stages Frame and show the Stages Frame
     def next(self):
@@ -215,11 +215,11 @@ class StagesFrame(Frame):
                            14: 'Slicing the grid to get the cells',
                            15: 'Blackfilling and centering the image'}
         self.currentstage = 1
-        self.mylink = Label(self, text="Developed by Neeramitra Reddy", borderwidth=3, relief=SUNKEN, fg="blue",
+        self.mylink = Label(self, text=" ", borderwidth=3, relief=SUNKEN, fg="blue",
                             cursor="hand2")
 
         self.mylink.grid(row=5, columnspan=6, sticky="ew")
-        self.mylink.bind("<Button-1>", lambda e: self.callback("https://github.com/neeru1207"))
+        self.mylink.bind("<Button-1>", lambda e: self.callback("#"))
         self.controller.title("Stages")
         self.stagelabel = Label(self, relief=GROOVE, text=self.stagesdict[self.currentstage], font=("Consolas 14"),
                                 bg="lightblue")
@@ -257,12 +257,12 @@ class StagesFrame(Frame):
     '''Go back to Home function. This loads the first frame'''
     def homefunc(self):
         self.controller.show_frame(HomePage)
-        self.controller.title("AI Sudoku")
+        self.controller.title("GridVision")
 
     '''Skip and go to the Sudoku frame'''
     def skipfunc(self):
         self.controller.show_frame(SudokuUI)
-        self.controller.title("Sudoku Recognized!")
+        self.controller.title("Grid Parsed!")
 
     '''Back function'''
     def back(self):
@@ -270,7 +270,7 @@ class StagesFrame(Frame):
         #first frame
         if self.currentstage == 1:
             self.controller.show_frame(HomePage)
-            self.controller.title("AI Sudoku")
+            self.controller.title("GridVision")
             return
         self.currentstage -= 1
         self.stagelabel['text'] = self.stagesdict[self.currentstage]
@@ -289,7 +289,7 @@ class StagesFrame(Frame):
         # Check if the user is in the last stage
         if self.currentstage == self.numberofstages:
             self.controller.show_frame(SudokuUI)
-            self.controller.title("Sudoku Recognized")
+            self.controller.title("Grid Parsed")
             return
         self.currentstage += 1
         self.stagelabel['text'] = self.stagesdict[self.currentstage]
@@ -314,7 +314,7 @@ class SudokuUI(Frame):
         self.solutionrevealed = False
         self.row, self.col = -1, -1
         self.solutionrevealed = False
-        self.controller.title("Sudoku Recognized!")
+        self.controller.title("Grid Parsed!")
         self.toplabel = Label(self,
                               text="Click on any cell to enter or change any wrong entries.\nEnter . to empty the cell or a number to fill it",
                               font=("Consolas 12"), relief=GROOVE, bg="lightblue")
@@ -336,7 +336,7 @@ class SudokuUI(Frame):
         self.back_button = Button(self, text="Back", font=("Consolas 12"), relief=RAISED, fg="red",
                                   bg="lightblue", command=self.goback, padx=10, pady=4)
         self.back_button.pack(fill=X, side=LEFT, padx=50, pady=5)
-        self.mylink = Label(self, text="Developed by Neeramitra Reddy", borderwidth=3, relief=SUNKEN, fg="blue",
+        self.mylink = Label(self, text=" ", borderwidth=3, relief=SUNKEN, fg="blue",
                             cursor="hand2")
         self.__draw_grid()
         self.__draw_puzzle()
@@ -362,7 +362,7 @@ class SudokuUI(Frame):
     '''This function takes the user back to the Home Page'''
     def gohome(self):
         self.controller.show_frame(HomePage)
-        self.controller.title("AI Sudoku")
+        self.controller.title("GridVision")
 
 
     '''Draws grid divided with blue lines into 3x3 squares'''
